@@ -10,5 +10,4 @@ target/
 .mvn/
 mvnw
 mvnw.cmd
-
-*.jar
+HELP.md

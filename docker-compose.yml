@@ -16,6 +16,15 @@ services:
       - tracker_network
     ports:
       - 8761:8761
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway_tracker
+    image: gateway_tracker
+    networks:
+      - tracker_network
+    ports:
+      - 8888:8888
 
 networks:
   tracker_network:
