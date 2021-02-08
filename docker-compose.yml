@@ -1,0 +1,44 @@
+version: '3'
+services:
+  database:
+    build:
+      context: ./database
+    container_name: database_tracker
+    image: database_tracker
+    networks:
+      - tracker_network
+  discovery:
+    build:
+      context: ./discovery
+    container_name: discovery_tracker
+    image: discovery_tracker
+    networks:
+      - tracker_network
+    ports:
+      - 8761:8761
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway_tracker
+    image: gateway_tracker
+    networks:
+      - tracker_network
+    ports:
+      - 8888:8888
+  core:
+    build:
+      context: ./core
+    container_name: core_tracker
+    image: core_tracker
+    environment:
+      - TRACKER_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - TRACKER_DB_URL=jdbc:postgresql://database:5432/tracker_db
+      - TRACKER_DB_USER=postgres
+      - TRACKER_DB_PASSWORD=postgres
+      - TRACKER_DB_MAXIMUM_POOL_SIZE=5
+    networks:
+      - tracker_network
+
+networks:
+  tracker_network:
+    driver: bridge

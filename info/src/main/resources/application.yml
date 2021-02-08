@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /api
+  port: 9016
+
+swagger:
+  base-path: ${server.servlet.context-path}
