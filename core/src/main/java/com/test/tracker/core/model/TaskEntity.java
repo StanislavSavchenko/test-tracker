@@ -1,18 +1,21 @@
-package com.test.tracker.model.entity;
+package com.test.tracker.core.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.test.tracker.std.LocalDateTimeDeserializer;
-import com.test.tracker.std.LocalDateTimeSerializer;
+import com.test.tracker.core.util.LocalDateTimeDeserializer;
+import com.test.tracker.core.util.LocalDateTimeSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
-@Entity
 @Table(name = "task")
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskEntity {
 
     @Id
@@ -21,30 +24,33 @@ public class TaskEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "topic", nullable = false)
+    @Column(name = "topic")
     private String topic;
 
-    @Column(name = "status", nullable = false)
+    @Column(name = "status")
     private String status;
 
-    @Column(name = "author_id", nullable = false)
-    private Long authorId;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "performer_id", nullable = false)
-    private Long performerId;
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private UserEntity authorId;
 
-    @Column(name = "created_dt", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE DEFAULT now()")
+    @ManyToOne
+    @JoinColumn(name = "performer_id")
+    private UserEntity performerId;
+
+    @Column(name = "created_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonIgnore
-    private LocalDateTime createDate;
+    private LocalDateTime createdDt;
 
-    @Column(name = "updated_dt", columnDefinition = "TIMESTAMP WITHOUT TIME ZONE DEFAULT now()")
+    @Column(name = "updated_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    private LocalDateTime updateDate;
-
+    private LocalDateTime updatedDt;
 }

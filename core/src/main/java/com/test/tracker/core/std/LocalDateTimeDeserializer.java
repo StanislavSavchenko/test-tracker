@@ -11,6 +11,10 @@ import java.time.ZoneId;
 
 public class LocalDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
 
+    public LocalDateTimeDeserializer() {
+        super(LocalDateTime.class);
+    }
+
     public LocalDateTimeDeserializer(Class<LocalDateTime> t) {
         super(t);
     }
