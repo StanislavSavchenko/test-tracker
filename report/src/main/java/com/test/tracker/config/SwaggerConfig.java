@@ -78,7 +78,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
         Contact contact = new Contact("", "", "");
         return new ApiInfoBuilder()
                 .contact(contact)
-                .title("Report Core API")
+                .title("Report API")
                 .description("")
                 .version("1.0")
                 .build();
