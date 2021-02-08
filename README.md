@@ -52,4 +52,12 @@ Util::filesystem module:
 * Docker-compose
 
 
+## Deployment ##
+
+Each module has Dockerfile for building module image. Project has docker-compose.yml file (in base directory of it) for building all modules and running in the required sequence.
+For building project you should use command 
+```docker-compose build```
+For running project you should use command
+```docker-compose up```
+
 
