@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "user_data")
+@Table(name = "subdivision")
 @Data
 public class SubDivisionEntity {
 
