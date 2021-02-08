@@ -1,8 +1,8 @@
 package com.test.tracker.core.service;
 
-import com.test.tracker.core.model.CommentEntity;
-import com.test.tracker.core.model.TaskEntity;
-import com.test.tracker.core.model.UserEntity;
+import com.test.tracker.core.model.entity.CommentEntity;
+import com.test.tracker.core.model.entity.TaskEntity;
+import com.test.tracker.core.model.entity.UserEntity;
 import com.test.tracker.core.repository.CommentRepository;
 import com.test.tracker.core.repository.TaskRepository;
 import com.test.tracker.core.repository.UserRepository;
