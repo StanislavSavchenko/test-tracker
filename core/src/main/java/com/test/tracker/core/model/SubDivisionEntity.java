@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.util.LocalDateTimeDeserializer;
 import com.test.tracker.core.util.LocalDateTimeSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Entity
 @Table(name = "subdivision")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class SubDivisionEntity {
 
     @Id

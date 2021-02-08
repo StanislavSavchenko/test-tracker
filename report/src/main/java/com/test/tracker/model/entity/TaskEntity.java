@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.std.LocalDateTimeDeserializer;
 import com.test.tracker.std.LocalDateTimeSerializer;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,7 +16,6 @@ import java.time.LocalDateTime;
 public class TaskEntity {
 
     @Id
-    @ApiModelProperty(readOnly = true, position = -1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
     @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq", allocationSize = 1, initialValue = 1)
     @Column(name = "id")

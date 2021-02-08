@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.util.LocalDateTimeDeserializer;
 import com.test.tracker.core.util.LocalDateTimeSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +15,8 @@ import java.util.Set;
 @Data
 @Table(name = "user_data")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     @Id

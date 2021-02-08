@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.util.LocalDateTimeDeserializer;
 import com.test.tracker.core.util.LocalDateTimeSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "task_attachment")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class TaskAttachmentEntity {
 
     @Id

@@ -38,6 +38,26 @@ services:
       - TRACKER_DB_MAXIMUM_POOL_SIZE=5
     networks:
       - tracker_network
+  report:
+    build:
+      context: ./report
+    container_name: report_tracker
+    image: report_tracker
+    environment:
+      - TRACKER_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - TRACKER_DB_URL=jdbc:postgresql://database:5432/tracker_db
+      - TRACKER_DB_USER=postgres
+      - TRACKER_DB_PASSWORD=postgres
+      - TRACKER_DB_MAXIMUM_POOL_SIZE=5
+    networks:
+      - tracker_network
+  info:
+    build:
+      context: ./info
+    container_name: info_tracker
+    image: info_tracker
+    ports:
+      - 9016:9016
 
 networks:
   tracker_network:

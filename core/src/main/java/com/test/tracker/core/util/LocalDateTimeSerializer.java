@@ -10,6 +10,10 @@ import java.time.ZoneId;
 
 public class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
 
+    public LocalDateTimeSerializer() {
+        super(LocalDateTime.class);
+    }
+
     public LocalDateTimeSerializer(Class<LocalDateTime> t) {
         super(t);
     }

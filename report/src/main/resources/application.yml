@@ -2,6 +2,19 @@ server:
   servlet:
     context-path: /api
   port: 9002
-
 swagger:
   base-path: ${server.servlet.context-path}
+spring:
+  application:
+    name: report
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
