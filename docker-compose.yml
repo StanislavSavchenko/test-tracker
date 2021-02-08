@@ -1,0 +1,22 @@
+version: '3'
+services:
+  database:
+    build:
+      context: ./database
+    container_name: database_tracker
+    image: database_tracker
+    networks:
+      - tracker_network
+  discovery:
+    build:
+      context: ./discovery
+    container_name: discovery_tracker
+    image: discovery_tracker
+    networks:
+      - tracker_network
+    ports:
+      - 8761:8761
+
+networks:
+  tracker_network:
+    driver: bridge
