@@ -1,0 +1,10 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: core
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
