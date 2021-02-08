@@ -1,4 +1,4 @@
-package com.test.tracker.core.util;
+package com.test.tracker.core.std;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

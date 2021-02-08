@@ -1,12 +1,12 @@
-package com.test.tracker.core.model;
+package com.test.tracker.core.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.model.views.Views;
-import com.test.tracker.core.util.LocalDateTimeDeserializer;
-import com.test.tracker.core.util.LocalDateTimeSerializer;
+import com.test.tracker.core.std.LocalDateTimeDeserializer;
+import com.test.tracker.core.std.LocalDateTimeSerializer;
 import lombok.Data;
 
 import javax.persistence.*;
