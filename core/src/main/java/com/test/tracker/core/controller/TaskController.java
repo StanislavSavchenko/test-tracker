@@ -1,6 +1,6 @@
 package com.test.tracker.core.controller;
 
-import com.test.tracker.core.model.TaskEntity;
+import com.test.tracker.core.model.entity.TaskEntity;
 import com.test.tracker.core.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +30,10 @@ public class TaskController {
     @PostMapping
     public TaskEntity create(@RequestBody TaskEntity request) {
         return taskService.create(request);
+    }
+
+    @GetMapping("/")
+    public TaskEntity getAll(@PathVariable("task_id") Long taskId) {
+        return taskService.getOne(taskId);
     }
 }

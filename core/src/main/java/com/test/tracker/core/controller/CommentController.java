@@ -1,7 +1,7 @@
 package com.test.tracker.core.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.test.tracker.core.model.CommentEntity;
+import com.test.tracker.core.model.entity.CommentEntity;
 import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;

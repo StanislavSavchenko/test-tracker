@@ -1,31 +1,34 @@
-package com.test.tracker.core.model;
+package com.test.tracker.core.model.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.test.tracker.core.util.LocalDateTimeDeserializer;
-import com.test.tracker.core.util.LocalDateTimeSerializer;
+import com.test.tracker.core.std.LocalDateTimeDeserializer;
+import com.test.tracker.core.std.LocalDateTimeSerializer;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
-@Entity
-@Table(name = "subdivision")
 @Data
-public class SubDivisionEntity {
+@Table(name = "task_attachment")
+@Entity
+public class TaskAttachmentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subdivision_id_seq")
-    @SequenceGenerator(name = "subdivision_id_seq", sequenceName = "subdivision_id_seq", allocationSize = 1, initialValue = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_attachment_id_seq")
+    @SequenceGenerator(name = "task_attachment_id_seq", sequenceName = "task_attachment_id_seq", allocationSize = 1, initialValue = 1)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name= "name")
+    private String name;
 
-    @ManyToMany(mappedBy = "subDivisionSet")
-    Set<UserEntity> userSet;
+    @Column(name= "path")
+    private String path;
+
+    @ManyToOne
+    @JoinColumn(name = "task_id")
+    private TaskEntity taskId;
 
     @Column(name = "created_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
