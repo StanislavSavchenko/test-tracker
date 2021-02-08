@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 RUN apt-get update && apt-get install -y postgresql-10
 
 USER postgres
+RUN    /etc/init.d/postgresql start &&\
+    /usr/bin/psql --command "alter user postgres password 'postgres';"
 
 RUN    /etc/init.d/postgresql start &&\
     /usr/bin/psql --command "create database tracker_db;"
