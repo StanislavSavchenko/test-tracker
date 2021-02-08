@@ -41,7 +41,6 @@
     </build>
 
     <modules>
-        <module>encryptor</module>
         <module>filesystem</module>
     </modules>
 
