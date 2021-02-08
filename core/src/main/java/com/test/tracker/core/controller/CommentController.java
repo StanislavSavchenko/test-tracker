@@ -5,6 +5,7 @@ import com.test.tracker.core.model.CommentEntity;
 import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @JsonView({Views.Retrieve.class})
     public CommentEntity create(@RequestParam("author_id") Long authorId,
                                 @RequestParam("task_id") Long taskId,

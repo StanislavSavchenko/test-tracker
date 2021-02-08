@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.util.LocalDateTimeDeserializer;
 import com.test.tracker.core.util.LocalDateTimeSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
 @Data
 @Table(name = "comment")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommentEntity {
 
     @Id

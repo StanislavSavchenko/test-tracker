@@ -7,3 +7,14 @@ swagger:
 spring:
   application:
     name: report
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
