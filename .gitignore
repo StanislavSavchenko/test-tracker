@@ -1,5 +1,7 @@
-/target/
+target/
 !.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
 .idea
 *.iws
@@ -9,3 +11,4 @@
 mvnw
 mvnw.cmd
 
+*.jar
