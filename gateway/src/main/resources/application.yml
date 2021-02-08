@@ -12,6 +12,17 @@ zuul:
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
+  routes:
+    core:
+      path: /core/**
+      serviceId: core
+      stripPrefix: false
+      sensitiveHeaders:
+    report:
+      path: /api/report/**
+      serviceId: report
+      stripPrefix: false
+      sensitiveHeaders:
 
 server:
   port: 8888
