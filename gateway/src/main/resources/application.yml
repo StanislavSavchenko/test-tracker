@@ -29,7 +29,7 @@ zuul:
       stripPrefix: false
       sensitiveHeaders:
     report:
-      path: /api/**
+      path: /report/**
       serviceId: report
       stripPrefix: false
       sensitiveHeaders:
