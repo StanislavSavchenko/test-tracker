@@ -9,6 +9,8 @@ import com.test.tracker.core.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentService {
 
@@ -41,5 +43,9 @@ public class CommentService {
                 .orElseThrow(() -> new RuntimeException("comment not found"));
 
         commentRepository.delete(comment);
+    }
+
+    public List<CommentEntity> findAllByTaskId(Long id) {
+        return commentRepository.findAllByTaskId(id);
     }
 }
