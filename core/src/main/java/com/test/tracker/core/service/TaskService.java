@@ -1,6 +1,8 @@
 package com.test.tracker.core.service;
 
 import com.test.tracker.core.exception.EntityNotFoundException;
+import com.test.tracker.core.model.dto.TaskDetailsResponse;
+import com.test.tracker.core.model.entity.CommentEntity;
 import com.test.tracker.core.model.entity.TaskAttachmentEntity;
 import com.test.tracker.core.model.entity.TaskEntity;
 import com.test.tracker.core.repository.TaskRepository;
@@ -21,21 +23,39 @@ public class TaskService {
     private final TaskRepository taskRepository;
     private final FileSystemService fileSystemService;
     private final TaskAttachmentService taskAttachmentService;
+    private final CommentService commentService;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService, TaskAttachmentService taskAttachmentService) {
+    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService, TaskAttachmentService taskAttachmentService, CommentService commentService) {
         this.taskRepository = taskRepository;
         this.fileSystemService = fileSystemService;
         this.taskAttachmentService = taskAttachmentService;
+        this.commentService = commentService;
     }
 
     public List<TaskEntity> getList() {
-        return (List<TaskEntity>) taskRepository.findAll();
+        return taskRepository.findAll();
     }
 
-    public TaskEntity getOne(Long id) {
-        return taskRepository.findById(id)
+    public TaskDetailsResponse getDetails(Long id) {
+        TaskEntity taskEntity = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("task not found"));
+
+        TaskDetailsResponse taskDetailsResponse = new TaskDetailsResponse();
+        List<CommentEntity> commentEntityList = commentService.findAllByTaskId(id);
+        List<TaskAttachmentEntity> taskAttachmentEntityList = taskAttachmentService.findAllByTaskId(id);
+
+        taskDetailsResponse.setId(taskEntity.getId());
+        taskDetailsResponse.setAuthorId(taskEntity.getAuthorId().getId());
+        taskDetailsResponse.setComments(commentEntityList);
+        taskDetailsResponse.setAttachments(taskAttachmentEntityList);
+        taskDetailsResponse.setName(taskEntity.getName());
+        taskDetailsResponse.setPerformerId(taskEntity.getId());
+        taskDetailsResponse.setStatus(taskEntity.getStatus());
+        taskDetailsResponse.setTopic(taskEntity.getTopic());
+
+        return taskDetailsResponse;
+
     }
 
     public TaskEntity create(TaskEntity request) {

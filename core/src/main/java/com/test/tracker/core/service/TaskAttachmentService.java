@@ -5,6 +5,7 @@ import com.test.tracker.core.repository.TaskAttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,4 +26,7 @@ public class TaskAttachmentService {
         return taskAttachmentRepository.findOneByIdAndTaskId(attachmentId, taskId);
     }
 
+    public List<TaskAttachmentEntity> findAllByTaskId(Long id) {
+        return taskAttachmentRepository.findAllByTaskId(id);
+    }
 }

@@ -1,5 +1,6 @@
 package com.test.tracker.core.controller;
 
+import com.test.tracker.core.model.dto.TaskDetailsResponse;
 import com.test.tracker.core.model.entity.TaskEntity;
 import com.test.tracker.core.service.TaskService;
 import com.test.tracker.core.util.DocumentUtil;
@@ -13,6 +14,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.net.URI;
+import java.util.List;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -30,8 +32,8 @@ public class TaskController {
     }
 
     @GetMapping(value = "/{task_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TaskEntity getById(@PathVariable("task_id") Long taskId) {
-        return taskService.getOne(taskId);
+    public TaskDetailsResponse getById(@PathVariable("task_id") Long taskId) {
+        return taskService.getDetails(taskId);
     }
 
     @PostMapping(value = "/{task_id}/attachment", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -74,7 +76,7 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public TaskEntity getAll(@PathVariable("task_id") Long taskId) {
-        return taskService.getOne(taskId);
+    public List<TaskEntity> getAll(@PathVariable("task_id") Long taskId) {
+        return taskService.getList();
     }
 }
