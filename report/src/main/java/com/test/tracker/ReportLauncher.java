@@ -15,31 +15,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableEurekaClient
 @SpringBootApplication
-@EnableSwagger2
 public class ReportLauncher {
 
     public static void main(String[] args) {
         SpringApplication.run(ReportLauncher.class, args);
     }
 
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.test.tracker.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo())
-                .useDefaultResponseMessages(false);
-    }
-
-    private ApiInfo apiInfo() {
-        Contact contact = new Contact("", "", "");
-        return new ApiInfoBuilder()
-                .contact(contact)
-                .title("Report API")
-                .description("")
-                .version("1.0")
-                .build();
-    }
 }

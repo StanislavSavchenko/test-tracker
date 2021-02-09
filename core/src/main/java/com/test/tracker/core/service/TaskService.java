@@ -49,7 +49,7 @@ public class TaskService {
 
     public SubdivisionDto getAll(Long subdivisionId) {
         if (subdivisionId == null) {
-            return new SubdivisionDto(TaskDto.mapToDtoList(taskRepository.findAllByAndOrderByCreatedDt()), null);
+            return new SubdivisionDto(TaskDto.mapToDtoList(taskRepository.findAllByOrderByCreatedDt()), null);
         }
         SubDivisionEntity subDivision = subDivisionRepository.findById(subdivisionId)
                 .orElseThrow(() -> new EntityNotFoundException("subdivision not found"));

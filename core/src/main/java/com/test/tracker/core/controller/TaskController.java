@@ -7,6 +7,7 @@ import com.test.tracker.core.model.entity.TaskEntity;
 import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.service.TaskService;
 import com.test.tracker.core.util.DocumentUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.net.URI;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
+@Api
 @RestController
 @RequestMapping("/core/task")
 public class TaskController {
