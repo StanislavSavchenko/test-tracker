@@ -5,6 +5,7 @@ import com.test.tracker.core.repository.TaskRepository;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,10 +13,12 @@ import java.util.List;
 public class TaskService {
 
     private final TaskRepository taskRepository;
+    private final FileSystemService fileSystemService;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService) {
         this.taskRepository = taskRepository;
+        this.fileSystemService = fileSystemService;
     }
 
     public List<TaskEntity> getList() {
@@ -44,5 +47,10 @@ public class TaskService {
         }
 
         return taskRepository.save(task);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void uploadAttachment() {
+
     }
 }

@@ -15,8 +15,6 @@
         <version>2.2.4.RELEASE</version>
     </parent>
 
-    <packaging>pom</packaging>
-
     <dependencies>
         <!--SPRING-->
         <dependency>
@@ -74,10 +72,6 @@
                     <source>11</source>
                     <target>11</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

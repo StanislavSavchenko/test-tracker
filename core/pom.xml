@@ -21,6 +21,13 @@
     </properties>
 
     <dependencies>
+        <!--PLATFORM-->
+        <dependency>
+            <groupId>com.test.tracker</groupId>
+            <artifactId>filesystem</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!--SPRING-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
