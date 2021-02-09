@@ -1,9 +1,5 @@
 server:
-  servlet:
-    context-path: /api
   port: 9002
-swagger:
-  base-path: ${server.servlet.context-path}
 spring:
   application:
     name: report
@@ -18,3 +14,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /swagger.json

@@ -1,4 +1,6 @@
 server:
+#  servlet:
+#    context-path: /api
   port: 8081
 spring:
   application:
@@ -17,3 +19,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 10000
+springfox:
+  documentation:
+    swagger:
+      v2:
+        path: /swagger.json
