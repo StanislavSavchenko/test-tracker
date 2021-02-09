@@ -28,7 +28,7 @@ public class TaskAttachmentEntity {
 
     @ManyToOne
     @JoinColumn(name = "task_id")
-    private TaskEntity taskId;
+    private TaskEntity task;
 
     @Column(name = "created_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
