@@ -27,7 +27,7 @@ services:
       - 8888:8888
   core:
     build:
-      context: ./core
+      context: .
     container_name: core_tracker
     image: core_tracker
     environment:
