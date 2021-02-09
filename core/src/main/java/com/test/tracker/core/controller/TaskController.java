@@ -1,8 +1,10 @@
 package com.test.tracker.core.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.test.tracker.core.model.dto.SubdivisionDto;
 import com.test.tracker.core.model.dto.TaskDetailsResponse;
 import com.test.tracker.core.model.entity.TaskEntity;
+import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.service.TaskService;
 import com.test.tracker.core.util.DocumentUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,13 +67,15 @@ public class TaskController {
     }
 
     @PatchMapping(value = "/{task_id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @JsonView({Views.Retrieve.class})
     public TaskEntity update(@PathVariable("task_id") Long taskId,
-                             @RequestBody TaskEntity taskEntity) {
+                             @RequestBody @JsonView({Views.Update.class}) TaskEntity taskEntity) {
         return taskService.update(taskId, taskEntity);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public TaskEntity create(@RequestBody TaskEntity request) {
+    @JsonView({Views.Retrieve.class})
+    public TaskEntity create(@RequestBody @JsonView({Views.Update.class}) TaskEntity request) {
         return taskService.create(request);
     }
 
