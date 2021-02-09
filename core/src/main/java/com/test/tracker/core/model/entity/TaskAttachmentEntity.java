@@ -1,5 +1,6 @@
 package com.test.tracker.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.std.LocalDateTimeDeserializer;
@@ -26,9 +27,10 @@ public class TaskAttachmentEntity {
     @Column(name= "path")
     private String path;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "task_id")
-    private TaskEntity taskId;
+    private TaskEntity task;
 
     @Column(name = "created_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)

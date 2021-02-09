@@ -55,8 +55,7 @@ public class HostMachineImpl implements FileSystem {
     @Override
     public void readFile(String fileName, File pathWhereToSave) throws FileNotFoundException {
 
-        Path source = Paths.get(rootPath, fileName)
-                .resolve(fileName);
+        Path source = Paths.get(rootPath, fileName);
         if (!Files.exists(source)) {
             throw new FileNotFoundException(rootPath + fileName);
         }

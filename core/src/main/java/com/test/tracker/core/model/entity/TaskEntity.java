@@ -34,11 +34,11 @@ public class TaskEntity {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private UserEntity authorId;
+    private UserEntity author;
 
     @ManyToOne
     @JoinColumn(name = "performer_id")
-    private UserEntity performerId;
+    private UserEntity performer;
 
     @Column(name = "created_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
