@@ -18,7 +18,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableEurekaClient
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.test.tracker"})
-@EnableEurekaClient
 @EnableSwagger2
 public class CoreApplication {
 
