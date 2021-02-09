@@ -1,5 +1,6 @@
 package com.test.tracker.core.controller;
 
+import com.test.tracker.core.model.dto.SubdivisionDto;
 import com.test.tracker.core.model.dto.TaskDetailsResponse;
 import com.test.tracker.core.model.entity.TaskEntity;
 import com.test.tracker.core.service.TaskService;
@@ -14,7 +15,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.net.URI;
-import java.util.List;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
@@ -76,7 +76,7 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public List<TaskEntity> getAll(@PathVariable("task_id") Long taskId) {
-        return taskService.getList();
+    public SubdivisionDto getAll(@RequestParam(value = "subdivision_id", required = false) Long subdivision_id) {
+        return taskService.getAll(subdivision_id);
     }
 }

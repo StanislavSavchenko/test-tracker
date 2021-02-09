@@ -1,10 +1,15 @@
 package com.test.tracker.core.service;
 
 import com.test.tracker.core.exception.EntityNotFoundException;
+import com.test.tracker.core.model.dto.InfoServiceResponse;
+import com.test.tracker.core.model.dto.SubdivisionDto;
 import com.test.tracker.core.model.dto.TaskDetailsResponse;
+import com.test.tracker.core.model.dto.TaskDto;
 import com.test.tracker.core.model.entity.CommentEntity;
+import com.test.tracker.core.model.entity.SubDivisionEntity;
 import com.test.tracker.core.model.entity.TaskAttachmentEntity;
 import com.test.tracker.core.model.entity.TaskEntity;
+import com.test.tracker.core.repository.SubDivisionRepository;
 import com.test.tracker.core.repository.TaskRepository;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -14,27 +19,56 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class TaskService {
 
     private final TaskRepository taskRepository;
     private final FileSystemService fileSystemService;
+    private final SubDivisionRepository subDivisionRepository;
+    private final AdditionalUserInfoService additionalUserInfoService;
     private final TaskAttachmentService taskAttachmentService;
     private final CommentService commentService;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService, TaskAttachmentService taskAttachmentService, CommentService commentService) {
+    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService, SubDivisionRepository subDivisionRepository, AdditionalUserInfoService additionalUserInfoService, TaskAttachmentService taskAttachmentService, CommentService commentService) {
         this.taskRepository = taskRepository;
         this.fileSystemService = fileSystemService;
+        this.subDivisionRepository = subDivisionRepository;
+        this.additionalUserInfoService = additionalUserInfoService;
         this.taskAttachmentService = taskAttachmentService;
         this.commentService = commentService;
     }
 
-    public List<TaskEntity> getList() {
-        return taskRepository.findAll();
+
+    public SubdivisionDto getAll(Long subdivisionId) {
+        if (subdivisionId == null) {
+            return new SubdivisionDto(TaskDto.mapToDtoList(taskRepository.findAllByAndOrderByCreatedDt()), null);
+        }
+        SubDivisionEntity subDivision = subDivisionRepository.findById(subdivisionId)
+                .orElseThrow(() -> new EntityNotFoundException("subdivision not found"));
+        List<TaskEntity> taskEntityList = taskRepository.findAllBySubdivision(subdivisionId);
+        List<TaskDto> taskDtoList = TaskDto.mapToDtoList(taskEntityList);
+
+        Set<Long> userIdSet = new HashSet<>();
+        taskDtoList.forEach((task) -> {
+            userIdSet.add(task.getAuthor().getUser().getId());
+            userIdSet.add(task.getPerformer().getUser().getId());
+        });
+
+        Map<Long, InfoServiceResponse> userMetaInfoMap = additionalUserInfoService.getUserInfo(userIdSet);
+        taskDtoList.forEach(taskDto -> {
+            taskDto.getAuthor().setMetaInfo(userMetaInfoMap.get(taskDto.getAuthor().getUser().getId()));
+            taskDto.getPerformer().setMetaInfo(userMetaInfoMap.get(taskDto.getPerformer().getUser().getId()));
+        });
+
+        return new SubdivisionDto(taskDtoList, subDivision);
     }
 
     public TaskDetailsResponse getDetails(Long id) {
@@ -46,7 +80,7 @@ public class TaskService {
         List<TaskAttachmentEntity> taskAttachmentEntityList = taskAttachmentService.findAllByTaskId(id);
 
         taskDetailsResponse.setId(taskEntity.getId());
-        taskDetailsResponse.setAuthorId(taskEntity.getAuthorId().getId());
+        taskDetailsResponse.setAuthorId(taskEntity.getAuthor().getId());
         taskDetailsResponse.setComments(commentEntityList);
         taskDetailsResponse.setAttachments(taskAttachmentEntityList);
         taskDetailsResponse.setName(taskEntity.getName());
@@ -64,14 +98,14 @@ public class TaskService {
 
     public TaskEntity update(Long id, TaskEntity request) {
         TaskEntity task = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("task not found"));
+                .orElseThrow(() -> new EntityNotFoundException("task not found"));
 
         if (StringUtils.isNotEmpty(request.getStatus())) {
             task.setStatus(request.getStatus());
         }
 
-        if (request.getPerformerId() != null) {
-            task.setPerformerId(request.getPerformerId());
+        if (request.getPerformer() != null) {
+            task.setPerformer(request.getPerformer());
         }
 
         return taskRepository.save(task);
