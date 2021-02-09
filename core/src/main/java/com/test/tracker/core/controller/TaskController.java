@@ -1,5 +1,6 @@
 package com.test.tracker.core.controller;
 
+import com.test.tracker.core.model.dto.SubdivisionDto;
 import com.test.tracker.core.model.entity.TaskEntity;
 import com.test.tracker.core.service.FileSystemService;
 import com.test.tracker.core.service.TaskService;
@@ -45,7 +46,7 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public TaskEntity getAll(@PathVariable("task_id") Long taskId) {
-        return taskService.getOne(taskId);
+    public SubdivisionDto getAll(@RequestParam(value = "subdivision_id", required = false) Long subdivision_id) {
+        return taskService.getAll(subdivision_id);
     }
 }

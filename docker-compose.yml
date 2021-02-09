@@ -58,6 +58,8 @@ services:
       context: ./info
     container_name: info_tracker
     image: info_tracker
+    environment:
+      - TRACKER_INFO_URL=http://info_tracker:9016/
     ports:
       - 9016:9016
 
