@@ -27,7 +27,7 @@ services:
       - 8888:8888
   core:
     build:
-      context: ./core
+      context: .
     container_name: core_tracker
     image: core_tracker
     environment:
@@ -38,6 +38,7 @@ services:
       - TRACKER_DB_USER=postgres
       - TRACKER_DB_PASSWORD=postgres
       - TRACKER_DB_MAXIMUM_POOL_SIZE=5
+      - TRACKER_INFO_URL=http://info_tracker:9016/
     networks:
       - tracker_network
   report:

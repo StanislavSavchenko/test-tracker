@@ -1,5 +1,6 @@
 package com.test.tracker.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.test.tracker.core.std.LocalDateTimeDeserializer;
@@ -24,9 +25,11 @@ public class UserEntity {
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_subdivision",

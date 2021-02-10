@@ -4,11 +4,13 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.test.tracker.core.model.entity.CommentEntity;
 import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.service.CommentService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Api
 @RestController
 @RequestMapping("/core/comment")
 public class CommentController {
