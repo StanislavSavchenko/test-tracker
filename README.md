@@ -4,6 +4,7 @@ This repo contains microservices witch should be separated to independent reposi
 ## Main structure ##
 Microservices list
 * core(core api service)
+* authcenter(auth service)
 * discovery (service discovery)
 * report (service for report flow)
 * gateway (service for API Gateway routing)
@@ -28,6 +29,7 @@ core and report modules:
 * TRACKER_DB_USER - database user 
 * TRACKER_DB_PASSWORD - database password 
 * TRACKER_DB_MAXIMUM_POOL_SIZE - database max pool size(using in hikari pool)
+* TRACKER_INFO_URL - url of info service
  
 ```
 
@@ -40,6 +42,15 @@ Util::filesystem module:
 * S3_SECRET_KEY - secret key
 * ROOT_DIR - root dir for HOST FILE_SYSTEM_PROVIDER
 
+```
+
+gateway and authcenter modules:
+```
+* TRACKER_JWT_EXPIRATION - jwt token live time
+* TRACKER_JWT_HEADER - jwt token header name
+* TRACKER_JWT_PREFIX - jwt token token prefix
+* TRACKER_JWT_LOGIN_URL - login url 
+* TRACKER_JWT_SECRET - jwt secret
 ```
 
 ## Tech stack ##
