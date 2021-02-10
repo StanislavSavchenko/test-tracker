@@ -77,8 +77,10 @@ public class TaskController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @JsonView({Views.Retrieve.class})
-    public TaskEntity create(@RequestBody @JsonView({Views.Update.class}) TaskEntity request) {
-        return taskService.create(request);
+    public TaskEntity create(@RequestParam("author_id") Long authorId,
+                             @RequestParam("performer_id") Long performerId,
+                             @RequestBody @JsonView({Views.Update.class}) TaskEntity request) {
+        return taskService.create(authorId, performerId, request);
     }
 
     @GetMapping()

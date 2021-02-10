@@ -5,12 +5,10 @@ import com.test.tracker.core.model.dto.InfoServiceResponse;
 import com.test.tracker.core.model.dto.SubdivisionDto;
 import com.test.tracker.core.model.dto.TaskDetailsResponse;
 import com.test.tracker.core.model.dto.TaskDto;
-import com.test.tracker.core.model.entity.CommentEntity;
-import com.test.tracker.core.model.entity.SubDivisionEntity;
-import com.test.tracker.core.model.entity.TaskAttachmentEntity;
-import com.test.tracker.core.model.entity.TaskEntity;
+import com.test.tracker.core.model.entity.*;
 import com.test.tracker.core.repository.SubDivisionRepository;
 import com.test.tracker.core.repository.TaskRepository;
+import com.test.tracker.core.repository.UserRepository;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,15 +32,17 @@ public class TaskService {
     private final AdditionalUserInfoService additionalUserInfoService;
     private final TaskAttachmentService taskAttachmentService;
     private final CommentService commentService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService, SubDivisionRepository subDivisionRepository, AdditionalUserInfoService additionalUserInfoService, TaskAttachmentService taskAttachmentService, CommentService commentService) {
+    public TaskService(TaskRepository taskRepository, FileSystemService fileSystemService, SubDivisionRepository subDivisionRepository, AdditionalUserInfoService additionalUserInfoService, TaskAttachmentService taskAttachmentService, CommentService commentService, UserRepository userRepository) {
         this.taskRepository = taskRepository;
         this.fileSystemService = fileSystemService;
         this.subDivisionRepository = subDivisionRepository;
         this.additionalUserInfoService = additionalUserInfoService;
         this.taskAttachmentService = taskAttachmentService;
         this.commentService = commentService;
+        this.userRepository = userRepository;
     }
 
 
@@ -91,7 +91,15 @@ public class TaskService {
 
     }
 
-    public TaskEntity create(TaskEntity request) {
+    public TaskEntity create(Long authorId, Long performerId, TaskEntity request) {
+        UserEntity author = userRepository.findById(authorId)
+                .orElseThrow(() -> new EntityNotFoundException("author not found"));
+        UserEntity performer = userRepository.findById(performerId)
+                .orElseThrow(() -> new EntityNotFoundException("performer not found"));
+
+        request.setAuthor(author);
+        request.setPerformer(performer);
+
         return taskRepository.save(request);
     }
 
