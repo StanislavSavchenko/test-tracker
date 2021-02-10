@@ -39,10 +39,12 @@ public class TaskEntity {
     @Column(name = "description")
     private String description;
 
+    @JsonView({Views.Retrieve.class})
     @ManyToOne
     @JoinColumn(name = "author_id")
     private UserEntity author;
 
+    @JsonView({Views.Retrieve.class})
     @ManyToOne
     @JoinColumn(name = "performer_id")
     private UserEntity performer;
