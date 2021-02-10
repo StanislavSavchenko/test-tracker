@@ -14,8 +14,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
-springfox:
-  documentation:
-    swagger:
-      v2:
-        path: /swagger.json
