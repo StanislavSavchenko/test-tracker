@@ -16,8 +16,8 @@ public interface TaskRepository extends JpaRepository<TaskEntity, Long> {
     @Query(
             nativeQuery = true,
             value = "select * from task as t " +
-                    "where t.author_id = (select * from user_subdivision as us " +
-                    "                    where as.subdivision_id = :subdivision_id)" +
+                    "where t.author_id = (select user_id from user_subdivision as us " +
+                    "                    where us.subdivision_id = :subdivision_id)" +
                     "order by t.created_dt")
     List<TaskEntity> findAllBySubdivision(@Param("subdivision_id") Long subdivisionId);
 }

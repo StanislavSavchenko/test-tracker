@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
@@ -62,10 +61,10 @@ public class TaskService {
             userIdSet.add(task.getPerformer().getUser().getId());
         });
 
-        Map<Long, InfoServiceResponse> userMetaInfoMap = additionalUserInfoService.getUserInfo(userIdSet);
+        Map<Long, Float> userMetaInfoMap = additionalUserInfoService.getUsersInfo(userIdSet);
         taskDtoList.forEach(taskDto -> {
-            taskDto.getAuthor().setMetaInfo(userMetaInfoMap.get(taskDto.getAuthor().getUser().getId()));
-            taskDto.getPerformer().setMetaInfo(userMetaInfoMap.get(taskDto.getPerformer().getUser().getId()));
+            taskDto.getAuthor().setMetaInfo(new InfoServiceResponse(userMetaInfoMap.get(taskDto.getAuthor().getUser().getId())));
+            taskDto.getPerformer().setMetaInfo(new InfoServiceResponse(userMetaInfoMap.get(taskDto.getPerformer().getUser().getId())));
         });
 
         return new SubdivisionDto(taskDtoList, subDivision);
