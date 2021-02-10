@@ -38,6 +38,7 @@ services:
       - TRACKER_DB_USER=postgres
       - TRACKER_DB_PASSWORD=postgres
       - TRACKER_DB_MAXIMUM_POOL_SIZE=5
+      - TRACKER_INFO_URL=http://info_tracker:9016/
     networks:
       - tracker_network
   report:
@@ -58,8 +59,6 @@ services:
       context: ./info
     container_name: info_tracker
     image: info_tracker
-    environment:
-      - TRACKER_INFO_URL=http://info_tracker:9016/
     ports:
       - 9016:9016
 
