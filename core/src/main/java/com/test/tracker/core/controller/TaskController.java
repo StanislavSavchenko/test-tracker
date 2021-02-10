@@ -81,7 +81,7 @@ public class TaskController {
         return taskService.create(request);
     }
 
-    @GetMapping("/")
+    @GetMapping()
     public SubdivisionDto getAll(@RequestParam(value = "subdivision_id", required = false) Long subdivision_id) {
         return taskService.getAll(subdivision_id);
     }
