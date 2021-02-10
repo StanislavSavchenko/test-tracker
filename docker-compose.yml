@@ -25,6 +25,25 @@ services:
       - tracker_network
     ports:
       - 8888:8888
+    environment:
+      - TRACKER_JWT_EXPIRATION=86400
+      - TRACKER_JWT_HEADER=Authorization
+      - TRACKER_JWT_PREFIX=Bearer
+      - TRACKER_JWT_LOGIN_URL=/login
+      - TRACKER_JWT_SECRET=tetetsdpkmfe343KFMWKEF
+  authcenter:
+    build:
+      context: ./authcenter
+    container_name: authcenter
+    image: authcenter
+    networks:
+      - tracker_network
+    environment:
+      - TRACKER_JWT_EXPIRATION=86400
+      - TRACKER_JWT_HEADER=Authorization
+      - TRACKER_JWT_PREFIX=Bearer
+      - TRACKER_JWT_LOGIN_URL=/login
+      - TRACKER_JWT_SECRET=tetetsdpkmfe343KFMWKEF
   core:
     build:
       context: .

@@ -25,6 +25,11 @@ zuul:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
   routes:
+    auth-center:
+      path: /login/**
+      serviceId: authcenter
+      sensitiveHeaders: Cookie, Set-Cookie
+      stripPrefix: false
     core:
       path: /core/**
       serviceId: core
