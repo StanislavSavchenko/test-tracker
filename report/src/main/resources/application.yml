@@ -1,9 +1,5 @@
 server:
-  servlet:
-    context-path: /api
   port: 9002
-swagger:
-  base-path: ${server.servlet.context-path}
 spring:
   application:
     name: report

@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: core
+  main:
+    allow-bean-definition-overriding: true
 
 eureka:
   client:

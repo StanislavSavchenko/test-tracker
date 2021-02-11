@@ -25,17 +25,39 @@ services:
       - tracker_network
     ports:
       - 8888:8888
+    environment:
+      - TRACKER_JWT_EXPIRATION=86400
+      - TRACKER_JWT_HEADER=Authorization
+      - TRACKER_JWT_PREFIX=Bearer
+      - TRACKER_JWT_LOGIN_URL=/login
+      - TRACKER_JWT_SECRET=tetetsdpkmfe343KFMWKEF
+  authcenter:
+    build:
+      context: ./authcenter
+    container_name: authcenter
+    image: authcenter
+    networks:
+      - tracker_network
+    environment:
+      - TRACKER_JWT_EXPIRATION=86400
+      - TRACKER_JWT_HEADER=Authorization
+      - TRACKER_JWT_PREFIX=Bearer
+      - TRACKER_JWT_LOGIN_URL=/login
+      - TRACKER_JWT_SECRET=tetetsdpkmfe343KFMWKEF
   core:
     build:
-      context: ./core
+      context: .
     container_name: core_tracker
     image: core_tracker
     environment:
+      - FILE_SYSTEM_PROVIDER=HOST
+      - ROOT_DIR=/
       - TRACKER_DRIVER_CLASS_NAME=org.postgresql.Driver
       - TRACKER_DB_URL=jdbc:postgresql://database:5432/tracker_db
       - TRACKER_DB_USER=postgres
       - TRACKER_DB_PASSWORD=postgres
       - TRACKER_DB_MAXIMUM_POOL_SIZE=5
+      - TRACKER_INFO_URL=http://info_tracker:9016/
     networks:
       - tracker_network
   report:

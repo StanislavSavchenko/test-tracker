@@ -1,7 +1,10 @@
 package com.test.tracker.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.std.LocalDateTimeDeserializer;
 import com.test.tracker.core.std.LocalDateTimeSerializer;
 import lombok.Data;
@@ -19,14 +22,18 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_data_id_seq")
     @SequenceGenerator(name = "user_data_id_seq", sequenceName = "user_data_id_seq", allocationSize = 1, initialValue = 1)
     @Column(name = "id")
+    @JsonView({Views.Retrieve.class})
     private Long id;
 
+    @JsonView({Views.Retrieve.class})
     @Column(name = "name")
     private String name;
 
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_subdivision",

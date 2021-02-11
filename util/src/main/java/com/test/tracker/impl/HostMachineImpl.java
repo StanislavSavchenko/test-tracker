@@ -26,8 +26,7 @@ public class HostMachineImpl implements FileSystem {
 
     @Override
     public void saveFile(String fileName, File fileToSave) {
-        Path targetDir = Paths.get(rootPath, fileName);
-        Path targetFile = targetDir.resolve(fileName);
+        Path targetFile = Paths.get(rootPath, fileName);
 
         try (FileChannel readCh = FileChannel.open(fileToSave.toPath(), StandardOpenOption.READ)) {
             try (FileChannel writeCh = FileChannel.open(targetFile, StandardOpenOption.WRITE, StandardOpenOption.CREATE);
@@ -56,8 +55,7 @@ public class HostMachineImpl implements FileSystem {
     @Override
     public void readFile(String fileName, File pathWhereToSave) throws FileNotFoundException {
 
-        Path source = Paths.get(rootPath, fileName)
-                .resolve(fileName);
+        Path source = Paths.get(rootPath, fileName);
         if (!Files.exists(source)) {
             throw new FileNotFoundException(rootPath + fileName);
         }

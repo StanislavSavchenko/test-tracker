@@ -1,5 +1,7 @@
 eureka:
   client:
+    instance:
+      prefer-ip-address: true
     serviceUrl:
       defaultZone: http://discovery:8761/eureka/
 spring:
@@ -11,10 +13,10 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 30000
 
 ribbon:
-  ReadTimeout: 20000
+  ReadTimeout: 60000
   ConnectTimeout: 20000
 
 zuul:
@@ -23,16 +25,17 @@ zuul:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
   routes:
+    auth-center:
+      path: /login/**
+      serviceId: authcenter
+      sensitiveHeaders: Cookie, Set-Cookie
+      stripPrefix: false
     core:
       path: /core/**
       serviceId: core
-      stripPrefix: false
-      sensitiveHeaders:
     report:
-      path: /api/**
+      path: /report/**
       serviceId: report
-      stripPrefix: false
-      sensitiveHeaders:
 
 server:
   port: 8888

@@ -1,7 +1,9 @@
 package com.test.tracker.core.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.test.tracker.core.model.views.Views;
 import com.test.tracker.core.std.LocalDateTimeDeserializer;
 import com.test.tracker.core.std.LocalDateTimeSerializer;
 import lombok.Data;
@@ -18,27 +20,34 @@ public class TaskEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "task_id_seq")
     @SequenceGenerator(name = "task_id_seq", sequenceName = "task_id_seq", allocationSize = 1, initialValue = 1)
     @Column(name = "id")
+    @JsonView({Views.Retrieve.class})
     private Long id;
 
+    @JsonView({Views.Retrieve.class, Views.Update.class})
     @Column(name = "name")
     private String name;
 
+    @JsonView({Views.Retrieve.class, Views.Update.class})
     @Column(name = "topic")
     private String topic;
 
+    @JsonView({Views.Retrieve.class, Views.Update.class})
     @Column(name = "status")
     private String status;
 
+    @JsonView({Views.Retrieve.class, Views.Update.class})
     @Column(name = "description")
     private String description;
 
+    @JsonView({Views.Retrieve.class})
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private UserEntity authorId;
+    private UserEntity author;
 
+    @JsonView({Views.Retrieve.class})
     @ManyToOne
     @JoinColumn(name = "performer_id")
-    private UserEntity performerId;
+    private UserEntity performer;
 
     @Column(name = "created_dt")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
