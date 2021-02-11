@@ -1,0 +1,24 @@
+server:
+  port: 8787
+spring:
+  application:
+    name: flyway
+  flyway:
+    enabled: true
+    validate-on-migrate: true
+    baseline-on-migrate: true
+
+endpoints:
+  actuator:
+    enabled: true
+  flyway:
+    enabled: true
+
+management:
+  security:
+    enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+

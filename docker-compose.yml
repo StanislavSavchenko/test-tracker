@@ -7,6 +7,19 @@ services:
     image: database_tracker
     networks:
       - tracker_network
+  flyway:
+    build:
+      context: ./flyway
+    container_name: flyway_tracker
+    image: flyway_tracker
+    environment:
+      - TRACKER_DRIVER_CLASS_NAME=org.postgresql.Driver
+      - TRACKER_DB_URL=jdbc:postgresql://database:5432/tracker_db
+      - TRACKER_DB_USER=postgres
+      - TRACKER_DB_PASSWORD=postgres
+      - TRACKER_DB_MAXIMUM_POOL_SIZE=5
+    networks:
+      - tracker_network
   discovery:
     build:
       context: ./discovery
