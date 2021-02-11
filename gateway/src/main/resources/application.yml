@@ -36,6 +36,5 @@ zuul:
     report:
       path: /report/**
       serviceId: report
-
 server:
   port: 8888
