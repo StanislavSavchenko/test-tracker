@@ -35,6 +35,8 @@ public class CommentService {
 
         request.setAuthor(author);
         request.setTask(task);
+        request.setAuthorId(authorId);
+        request.setTaskId(taskId);
 
         return commentRepository.save(request);
     }
