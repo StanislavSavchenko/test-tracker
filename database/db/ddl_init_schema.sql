@@ -80,8 +80,8 @@ CREATE SEQUENCE task_attachment_id_seq
 CREATE TABLE task_attachment
 (
     id BIGINT NOT NULL DEFAULT nextval('task_attachment_id_seq'::regclass),
-    name VARCHAR(50) NOT NULL,
-    path VARCHAR(50) NOT NULL,
+    name TEXT NOT NULL,
+    path TEXT NOT NULL,
     task_id BIGINT NOT NULL,
     created_dt TIMESTAMP WITHOUT TIME ZONE DEFAULT now(),
     updated_dt TIMESTAMP WITHOUT TIME ZONE DEFAULT now()
